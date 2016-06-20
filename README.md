@@ -1,7 +1,7 @@
-# AerosolDelta
+# Aerosols over Cryosphere
 Quantifying aerosol presence and composition over Earth's ice sheets and glaciers - mapping anthropogenic and natural aerosol patters and estimating changes over time
 
-# Decription
+# Description
 Many of Earth’s glaciers have been losing mass at an alarming rate in the past few decades. Both anthropogenic and natural aerosols deposited on snow and ice can darken reflective surfaces, increase solar absorption and subsequently enhance snow and ice melt rates. This project seeks to map aerosols over Earth's land ice using the global land ice identification mask and monthly mean MERRA-2 aerosol data. Ideally, the project will be completed for all of Earth, mapping aerosol concentrations, with seasonal and annual totals from 1980-present. If time/space limits us, the project can be reduced geographically (e.g. Arctic or Himalaya) and temporally (2000-present).
 
 # Code
