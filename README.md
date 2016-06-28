@@ -9,29 +9,29 @@ Many of Earth’s glaciers have been losing mass at an alarming rate in the past
 file size: whole inventory 410 mb zipped
 739 MB unzipped, 125 files, organized by 19 regions
 
-MERRA-2 aerosol raster modeled [data](http://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/data_access/). Input data consists of monthly mean dust, organic carbon, black carbon, sea salt and sulfate aerosol concentrations.
-To get the data, visit:  http://disc.sci.gsfc.nasa.gov/uui/datasets?keywords=%22MERRA-2%22
-NetCDF-4 file
-File sizes ~155 MB per monthly mean file.
+MERRA-2 aerosol raster modeled [data](http://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/data_access/). Required input data consists of monthly mean dust, organic carbon, black carbon, sea salt and sulfate aerosol concentrations.
+To get the data, visit [DISC data ordering site](http://disc.sci.gsfc.nasa.gov/uui/datasets?keywords=%22MERRA-2%22) or [Direct download](ftp://goldsmr4.sci.gsfc.nasa.gov/data/s4pa/)
 More info can be found in this [pdf](http://gmao.gsfc.nasa.gov/pubs/docs/Bosilovich785.pdf)
+Data format = NetCDF-4.  File sizes ~155 MB per monthly mean file.
 
-CALIOP aerosol raster observation Version 3 [Aerosol Profile data]
+CALIOP aerosol raster observation Version 3 [Aerosol Profile data](https://eosweb.larc.nasa.gov/project/calipso/cal_lid_l3_apro_cloudfree-standard-V3-00)
 Monthly global gridded data, nighttime aerosol extinction profiles, cloud-free. CAL_LID_L3_APro_CloudFree_Standard-V3-00   Available from 2006-present, between latitudes of 82 degrees North to 82 degrees South.    Sun synchronous orbit, equator crossing time of 2 pm, 16-day orbit repeat cycle.
 Observations are to be compared with modeled aerosol results.
 To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi)
+Data format = HDF.
 
 MODIS, Aqua, Collection 6, 8-day surface reflectance raster data, to be collected coinciding with season or year corresponding to aerosol data.
-To learn more and access data see:
-https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/myd09a1
-or http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.006/
-File size ~80 MB per tile, all 7 spectral bands, one tile. 460 tiles to cover Earth, tiles are 10 degrees by 10 degrees at the equator (http://modis-land.gsfc.nasa.gov/MODLAND_grid.html).
+To learn more and access data: [LPDAAC website data ordering]
+(https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/myd09a1)
+or [Online list of data](http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.006/)
+File size ~80 MB per tile, all 7 spectral bands, one tile. 460 tiles to cover Earth, tiles are 10 degrees by 10 degrees at the equator [MODIS Grid](http://modis-land.gsfc.nasa.gov/MODLAND_grid.html).
+Data format = HDF.
 
-If time allows, desire to add land ice surface reflectance values from Landsat (all mountain, peninsula, coastal glaciers) for smaller glaciers.  Reflectance data will be collected to coincide with measured aerosol season or year (e.g. spring or annual).
+Landsat data to be used for smaller mountain, peninsula, coastal glaciers.  Reflectance data will be collected to coincide with measured aerosol season or year (e.g. spring or annual).
 Landsat, raster, surface reflectance data
-To learn more and access data see:
-http://landsat.usgs.gov/CDR_LSR.php
+To learn more and access data: [Landsat website](http://landsat.usgs.gov/CDR_LSR.php)
 File size ~2.5 GB per Landsat scene, all 7 spectral bands, 190 km x 180 km area per file.
-
+Data format = GeoTIFF.
 
 
 # Tools
