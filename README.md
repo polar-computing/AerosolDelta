@@ -11,7 +11,7 @@ File size: whole inventory 410 mb zipped, 739 MB unzipped, 125 files, organized 
 
 MERRA-2 aerosol raster modeled [data](http://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/data_access/). Required input data consists of monthly mean dust, organic carbon, black carbon, sea salt and sulfate aerosol surface mass concentration and scattering aerosol optical thickness (AOT).   Scientific data set (SDS) or bands are: BCSCATAU - Black Carbon Scattering AOT (550 nm), BCSMASS - Black Carbon Surface Mass Concentration, OCSCATAU - Organic Carbon Scattering AOT (550 nm), Organic Carbon Surface Mass Concentration (Particulate Matter), DUSCATAU - Dust Scattering AOT (550 nm), DUSMASS - Dust Surface Mass Concentration, SSSCATAU - Sea Salt Scattering AOT (550 nm), SSSMASS - Sea Salt Surface Mass Concentration, SUSCATAU - SO4 Scattering AOT (550 nm), SO4SMASS - SO4 Surface Mass Concentration, SO2SMASS - SO2 Surface Mass Concentration, TOTSCATAU - Total Aerosol Scattering AOT (550 nm).
 To get the data, visit [DISC data ordering site](http://disc.sci.gsfc.nasa.gov/uui/datasets?keywords=%22MERRA-2%22) or Direct download via ftp://goldsmr4.sci.gsfc.nasa.gov/data/s4pa/.  
-More info can be found in this [pdf](http://gmao.gsfc.nasa.gov/pubs/docs/Bosilovich785.pdf).  
+More info can be found in this [pdf](http://gmao.gsfc.nasa.gov/pubs/docs/Bosilovich785.pdf).  MERRA-2 data has a resolution of 0.625 degrees (longitude) (576 grid points) by 0.5 degrees (latitude) (361 grid points) or approximately 50km spatial resolution.
 Data format = NetCDF-4.  File sizes ~3-155 MB per monthly mean file.
 
 CALIOP aerosol raster observation Version 3 [Aerosol Profile data](https://eosweb.larc.nasa.gov/project/calipso/cal_lid_l3_apro_cloudfree-standard-V3-00)
