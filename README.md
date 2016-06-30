@@ -47,6 +47,12 @@ or [LP DAAC data pool / ftp or http download](https://lpdaac.usgs.gov/data_acces
 
 [hdfgroup.org website](https://www.hdfgroup.org/) -- information / tools /readers for understanding MODIS, CALIOP HDF formats
 
+[MERRA-2 User Guide](http://gmao.gsfc.nasa.gov/pubs/tm/docs/Bosilovich803.pdf)
+
+[MODIS Surface Reflectance User Guide](http://modis-sr.ltdri.org/guide/MOD09_UserGuide_v1.4.pdf)
+
+[CALIOP Website, Tools, Information](https://eosweb.larc.nasa.gov/news/calipso-v3-00-lidar-level-3-aerosol-product-release)
+
 
 
 
