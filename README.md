@@ -43,6 +43,8 @@ or [LP DAAC data pool / ftp or http download](https://lpdaac.usgs.gov/data_acces
 
 [pyMODIS](http://www.pymodis.org/) --  mosaicing/reprojecting/gridding/downloading MODIS data
 
+[MODIS Grid](http://modis-land.gsfc.nasa.gov/MODLAND_grid.html) -- information on MODIS grid / tiles
+
 [hdfgroup.org website](https://www.hdfgroup.org/) -- information / tools /readers for understanding MODIS, CALIOP HDF formats
 
 
