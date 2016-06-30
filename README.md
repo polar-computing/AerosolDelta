@@ -47,6 +47,8 @@ or [LP DAAC data pool / ftp or http download](https://lpdaac.usgs.gov/data_acces
 
 [hdfgroup.org website](https://www.hdfgroup.org/) -- information / tools /readers for understanding MODIS, CALIOP HDF formats
 
+[Example NetCDF readers](http://www-pord.ucsd.edu/~cjiang/python.html)
+
 [Randolph Glacier Inventory 5.0](http://www.glims.org/RGI/)
 
 [MERRA-2 User Guide](http://gmao.gsfc.nasa.gov/pubs/tm/docs/Bosilovich803.pdf)
