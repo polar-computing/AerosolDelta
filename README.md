@@ -38,12 +38,12 @@ Data format = GeoTIFF.
 Python
 (matlab, idl, ENVI/IDL, ArcGIS - commonly used proprietary software)  
 
-[Daac2Disk tool](https://lpdaac.usgs.gov/lp_daac2disk_download_manager_release) - can be helpful for downloading MODIS data
-or [LP DAAC data pool / ftp or http download](https://lpdaac.usgs.gov/data_access/data_pool) 
+[Daac2Disk tool](https://lpdaac.usgs.gov/lp_daac2disk_download_manager_release)
+or [LP DAAC data pool / ftp or http download](https://lpdaac.usgs.gov/data_access/data_pool)  - for downloading MODIS data
 
-[pyMODIS](http://www.pymodis.org/) -- may be helpful in mosaicing/reprojecting/gridding/downloading MODIS data
+[pyMODIS](http://www.pymodis.org/) --  mosaicing/reprojecting/gridding/downloading MODIS data
 
-[hdfgroup.org website](https://www.hdfgroup.org/) -- may be helpful in understanding MODIS, CALIOP HDF formats
+[hdfgroup.org website](https://www.hdfgroup.org/) -- information / tools /readers for understanding MODIS, CALIOP HDF formats
 
 
 
