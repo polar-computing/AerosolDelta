@@ -53,6 +53,8 @@ or [LP DAAC data pool / ftp or http download](https://lpdaac.usgs.gov/data_acces
 
 [CALIOP Website, Tools, Information](https://eosweb.larc.nasa.gov/news/calipso-v3-00-lidar-level-3-aerosol-product-release)
 
+[Randolph Glacier Inventory 5.0](http://www.glims.org/RGI/)
+
 
 
 
