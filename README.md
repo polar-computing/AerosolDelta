@@ -69,7 +69,7 @@ File size ~20-80 MB per tile. 460 tiles to cover Earth (see [MODIS Grid](http://
 Landsat, raster, surface reflectance data
 To learn more and access data: [Landsat website](http://landsat.usgs.gov/CDR_LSR.php)
 File size ~2.5 GB per Landsat scene, all 7 spectral bands, 190 km x 180 km area per file.
-Data format = GeoTIFF.
+Data format = GeoTIFF. [Landsat User Guide](http://landsat.usgs.gov/documents/cdr_sr_product_guide.pdf)
 
 
 # Tools
