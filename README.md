@@ -58,12 +58,21 @@ Observations are to be compared with modeled aerosol results.
 To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi)
 Data format = HDF.  File size ~180 MB.
 
-**MODIS, Aqua, Collection 6, 8-day surface reflectance raster data**, to be collected coinciding with season or year corresponding to aerosol data.  Collect reflectance data (SDS) all 7 spectral bands.
-To learn more and access data: [LPDAAC website data ordering]
+**MODIS, Aqua, Collection 6, 8-day surface reflectance raster data**, to be collected coinciding with season or year corresponding to aerosol data. To learn more and access data: [LPDAAC website data ordering]
 (https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/myd09a1)
 or [Online list of data](http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.006/)
 Data format = HDF.    
 File size ~20-80 MB per tile. 460 tiles to cover Earth (see [MODIS Grid](http://modis-land.gsfc.nasa.gov/MODLAND_grid.html)), tiles are 10 degrees by 10 degrees at the equator.
+
+Scientific data set (SDS) or bands are: 
+
+- Surface reflectance for band 1
+- Surface reflectance for band 2
+- Surface reflectance for band 3
+- Surface reflectance for band 4
+- Surface reflectance for band 5
+- Surface reflectance for band 6
+- Surface reflectance for band 7
 
 **Landsat Data** to be used for smaller mountain, peninsula, coastal glaciers.  Reflectance data will be collected to coincide with measured aerosol season or year (e.g. spring or annual).
 Landsat, raster, surface reflectance data
