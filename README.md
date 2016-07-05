@@ -73,6 +73,12 @@ Scientific data set (SDS) or bands are:
 - Surface reflectance for band 5
 - Surface reflectance for band 6
 - Surface reflectance for band 7
+- Surface reflectance 500m quality control flags
+- Solar zenith
+- View zenith
+- Relative azimuth
+- Surface reflectance 500m state flags
+- Surface reflectance day of year
 
 **Landsat Data** to be used for smaller mountain, peninsula, coastal glaciers.  Reflectance data will be collected to coincide with measured aerosol season or year (e.g. spring or annual).
 Landsat, raster, surface reflectance data
