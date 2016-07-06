@@ -84,7 +84,7 @@ Scientific data set (SDS) or bands are:
 Landsat, raster, surface reflectance data
 To learn more and access data: [Landsat website](http://landsat.usgs.gov/CDR_LSR.php)
 File size ~2.5 GB per Landsat scene, all 7 spectral bands, 190 km x 180 km area per file.
-Data format = GeoTIFF. [Landsat 4-7 Surface Reflectance User Guide(data from 1982-present)](http://landsat.usgs.gov/documents/cdr_sr_product_guide.pdf)  [Landsat 8 Surface Reflectance User Guide (data from 2013-present)](http://landsat.usgs.gov/documents/provisional_lasrc_product_guide.pdf)
+Data format = GeoTIFF. [Landsat 4-7 Surface Reflectance User Guide (data from 1982-present)](http://landsat.usgs.gov/documents/cdr_sr_product_guide.pdf)  [Landsat 8 Surface Reflectance User Guide (data from 2013-present)](http://landsat.usgs.gov/documents/provisional_lasrc_product_guide.pdf)
 
 
 # Tools
