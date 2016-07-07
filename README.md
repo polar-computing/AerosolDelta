@@ -46,7 +46,7 @@ Scientific data set (SDS) or bands are:
 - SO2SMASS - SO2 Surface Mass Concentration
 - TOTSCATAU - Total Aerosol Scattering AOT (550 nm)
 
-(If time allows, MERRA-2 monthly surface albedo is available from filename M2TMNXRAD.5.12.4), SDS:
+If time allows, MERRA-2 monthly surface albedo is available from filename M2TMNXRAD.5.12.4, SDS:
  - ALBEDO - surface albedo
 
 
