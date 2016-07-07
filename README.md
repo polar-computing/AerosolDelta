@@ -64,7 +64,7 @@ Data format = HDF.  File size ~180 MB.
 
 Scientific data set (SDS) or bands are: 
 
--  standby - Kimberly sent email to data developer to check on SDSs.
+-  standby - Kimberly sent email on 7/7/16 to data developer to check on SDSs.
 
 **MODIS, Aqua, Collection 6, 8-day surface reflectance raster data**, to be collected coinciding with season or year corresponding to aerosol data. To learn more and access data: [LPDAAC website data ordering]
 (https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/myd09a1)
