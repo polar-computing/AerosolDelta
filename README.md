@@ -56,11 +56,15 @@ More info can be found in this [pdf](http://gmao.gsfc.nasa.gov/pubs/docs/Bosilov
 MERRA-2 data has a resolution of 0.625 degrees (longitude) (576 grid points) by 0.5 degrees (latitude) (361 grid points) or approximately 50km spatial resolution.
 Data format = NetCDF-4.  File sizes ~3-155 MB per monthly mean file.
 
-[**CALIOP aerosol raster observation Version 3 Aerosol Profile data**](https://eosweb.larc.nasa.gov/project/calipso/cal_lid_l3_apro_cloudfree-standard-V3-00)
-Monthly global gridded data, nighttime aerosol extinction profiles, cloud-free. CAL_LID_L3_APro_CloudFree_Standard-V3-00   Available from 2006-present, between latitudes of 82 degrees North to 82 degrees South.    Sun synchronous orbit, equator crossing time of 2 pm, 16-day orbit repeat cycle.
-Observations are to be compared with modeled aerosol results.
-To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi)
+[**CALIOP aerosol raster observation Version 3, Level 3 Aerosol Profile, Cloud Free data**](https://eosweb.larc.nasa.gov/project/calipso/cal_lid_l3_apro_cloudfree-standard-V3-00)
+Monthly global gridded data, nighttime aerosol extinction profiles, cloud-free. Filename is "CAL_LID_L3_APro_CloudFree_Standard-V3-00.hdf"   Available from 2006-present, between latitudes of 85 degrees North to 85 degrees South.    Sun synchronous orbit, equator crossing time of 2 pm, 16-day orbit repeat cycle.  Spatial resolution 2 degrees in latitude, 5 degrees in longitude. 
+Observations are to be compared with modeled MERRA-2 aerosol results.
+To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi) /  (CALIPSO Data Products Catalog)[http://www-calipso.larc.nasa.gov/products/CALIPSO_DPC_Rev3x8.pdf] / (CALIPSO Data User's Guide)[http://www-calipso.larc.nasa.gov/resources/calipso_users_guide/]
 Data format = HDF.  File size ~180 MB.
+
+Scientific data set (SDS) or bands are: 
+
+-  standby - Kimberly sent email to data developer to check on SDSs.
 
 **MODIS, Aqua, Collection 6, 8-day surface reflectance raster data**, to be collected coinciding with season or year corresponding to aerosol data. To learn more and access data: [LPDAAC website data ordering]
 (https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/myd09a1)
