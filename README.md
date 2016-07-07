@@ -86,6 +86,15 @@ To learn more and access data: [Landsat website](http://landsat.usgs.gov/CDR_LSR
 File size ~2.5 GB per Landsat scene, all 7 spectral bands, 190 km x 180 km area per file.
 Data format = GeoTIFF. [Landsat 4-7 Surface Reflectance User Guide (data from 1982-present)](http://landsat.usgs.gov/documents/cdr_sr_product_guide.pdf)  [Landsat 8 Surface Reflectance User Guide (data from 2013-present)](http://landsat.usgs.gov/documents/provisional_lasrc_product_guide.pdf)
 
+Scientific data set (SDS) or bands are: 
+
+- Surface reflectance for band 1
+- Surface reflectance for band 2
+- Surface reflectance for band 3
+- Surface reflectance for band 4
+- Surface reflectance for band 5
+- Surface reflectance for band 6
+- Surface reflectance for band 7
 
 # Tools
 Python
