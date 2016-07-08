@@ -100,7 +100,7 @@ File size ~2.5 GB per Landsat scene, all 7 spectral bands, 190 km x 180 km area 
 Data format = GeoTIFF. [Landsat 4-7 Surface Reflectance User Guide (data from 1982-present)](http://landsat.usgs.gov/documents/cdr_sr_product_guide.pdf)  [Landsat 8 Surface Reflectance User Guide (data from 2013-present)](http://landsat.usgs.gov/documents/provisional_lasrc_product_guide.pdf)   [Landsat sensor versions/history]( http://landsat.usgs.gov/about_mission_history.php) 
 [GitHub tool for bulk downloading Landsat orders](https://github.com/USGS-EROS/espa-bulk-downloader)
 
-Scientific data set (SDS) or bands are:   (Note Landsat filenames use the sensor id (LXX), path (PPP), row (RRR), year (YYYY), julian date (DDD),  followed by '_sr_')  (Sensors LE7 for Landsat 7 Enhanced Thematic Mapper, LT5 for Landsat 5 Thematic Mapper, LT4 for Landsat 4 Thematic Mapper)
+Scientific data set (SDS) or bands are:   (Note Landsat filenames use the sensor id (LXX), path (PPP), row (RRR), year (YYYY), julian date (DDD),  followed by '_sr_')  (Sensors LE7 for Landsat 7 Enhanced Thematic Mapper, LT5 for Landsat 5 Thematic Mapper, LT4 for Landsat 4 Thematic Mapper).  GeoTIFF files have latitude/longitude information in file format.
 
 - Surface reflectance for band 1
 - Surface reflectance for band 2
