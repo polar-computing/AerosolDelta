@@ -59,7 +59,7 @@ Data format = NetCDF-4.  File sizes ~3-155 MB per monthly mean file.
 [**CALIOP aerosol raster observation Version 3, Level 3 Aerosol Profile, Cloud Free data**](https://eosweb.larc.nasa.gov/project/calipso/cal_lid_l3_apro_cloudfree-standard-V3-00)
 Monthly global gridded data, nighttime aerosol extinction profiles, cloud-free. Filename is "CAL_LID_L3_APro_CloudFree_Standard-V3-00.hdf"   Available from 2006-present, between latitudes of 85 degrees North to 85 degrees South.    Sun synchronous orbit, equator crossing time of 2 pm, 16-day orbit repeat cycle.  Spatial resolution 2 degrees in latitude, 5 degrees in longitude. 
 Observations are to be compared with modeled MERRA-2 aerosol results.
-To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi) /  [CALIPSO Data Products Catalog](http://www-calipso.larc.nasa.gov/products/CALIPSO_DPC_Rev3x8.pdf)   [CALIPSO Data User's Guide](http://www-calipso.larc.nasa.gov/resources/calipso_users_guide/)
+To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi) /  [CALIPSO Data Products Catalog](http://www-calipso.larc.nasa.gov/products/CALIPSO_DPC_Rev3x8.pdf)  /  [CALIPSO Data User's Guide](http://www-calipso.larc.nasa.gov/resources/calipso_users_guide/)
 Data format = HDF.  File size ~180 MB.
 
 Scientific data set (SDS) or bands are: 
