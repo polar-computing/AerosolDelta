@@ -59,7 +59,7 @@ Data format = NetCDF-4.  File sizes ~3-155 MB per monthly mean file.
 [**CALIOP aerosol raster observation Version 3, Level 3 Aerosol Profile, Cloud Free data**](https://eosweb.larc.nasa.gov/project/calipso/cal_lid_l3_apro_cloudfree-standard-V3-00)
 Monthly global gridded data, nighttime aerosol extinction profiles, cloud-free. Filename is "CAL_LID_L3_APro_CloudFree_Standard-V3-00.hdf"   Available from 2006-present, between latitudes of 85 degrees North to 85 degrees South.    Sun synchronous orbit, equator crossing time of 2 pm, 16-day orbit repeat cycle.  Spatial resolution 2 degrees in latitude, 5 degrees in longitude. 
 Observations are to be compared with modeled MERRA-2 aerosol results.
-To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi) /  (CALIPSO Data Products Catalog)[http://www-calipso.larc.nasa.gov/products/CALIPSO_DPC_Rev3x8.pdf] / (CALIPSO Data User's Guide)[http://www-calipso.larc.nasa.gov/resources/calipso_users_guide/]
+To get data, visit [ASDC HTML Order Tool](https://eosweb.larc.nasa.gov/HORDERBIN/HTML_Start.cgi) /  [CALIPSO Data Products Catalog](http://www-calipso.larc.nasa.gov/products/CALIPSO_DPC_Rev3x8.pdf)   [CALIPSO Data User's Guide](http://www-calipso.larc.nasa.gov/resources/calipso_users_guide/)
 Data format = HDF.  File size ~180 MB.
 
 Scientific data set (SDS) or bands are: 
@@ -92,7 +92,7 @@ Scientific data set (SDS) or bands are:
 Landsat, raster, surface reflectance data
 To learn more and access data: [Landsat website](http://landsat.usgs.gov/CDR_LSR.php)
 File size ~2.5 GB per Landsat scene, all 7 spectral bands, 190 km x 180 km area per file.
-Data format = GeoTIFF. [Landsat 4-7 Surface Reflectance User Guide (data from 1982-present)](http://landsat.usgs.gov/documents/cdr_sr_product_guide.pdf) / [Landsat 8 Surface Reflectance User Guide (data from 2013-present)](http://landsat.usgs.gov/documents/provisional_lasrc_product_guide.pdf) / On [Landsat sensor versions/history]( http://landsat.usgs.gov/about_mission_history.php) / 
+Data format = GeoTIFF. [Landsat 4-7 Surface Reflectance User Guide (data from 1982-present)](http://landsat.usgs.gov/documents/cdr_sr_product_guide.pdf)  [Landsat 8 Surface Reflectance User Guide (data from 2013-present)](http://landsat.usgs.gov/documents/provisional_lasrc_product_guide.pdf)   [Landsat sensor versions/history]( http://landsat.usgs.gov/about_mission_history.php) 
 [GitHub tool for bulk downloading Landsat orders](https://github.com/USGS-EROS/espa-bulk-downloader)
 
 Scientific data set (SDS) or bands are:   (Note Landsat filenames use the sensor id (LXX), path (PPP), row (RRR), year (YYYY), julian date (DDD),  followed by '_sr_')  (Sensors LE7 for Landsat 7 Enhanced Thematic Mapper, LT5 for Landsat 5 Thematic Mapper, LT4 for Landsat 4 Thematic Mapper)
