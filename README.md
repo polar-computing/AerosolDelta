@@ -75,7 +75,7 @@ Scientific data set (SDS) or bands are:
 (https://lpdaac.usgs.gov/dataset_discovery/modis/modis_products_table/myd09a1)
 or [Online list of data](http://e4ftl01.cr.usgs.gov/MOLA/MYD09A1.006/)
 Data format = HDF.    
-File size ~20-80 MB per tile. 460 tiles to cover Earth (see [MODIS Grid](http://modis-land.gsfc.nasa.gov/MODLAND_grid.html)), tiles are 10 degrees by 10 degrees at the equator.
+File size ~20-80 MB per tile. 460 tiles to cover Earth (see [MODIS Grid](http://modis-land.gsfc.nasa.gov/MODLAND_grid.html)),[MODIS Metadata](https://lpdaac.usgs.gov/dataset_discovery/modis)  tiles are 10 degrees by 10 degrees at the equator.
 
 Scientific data set (SDS) or bands are: 
 
