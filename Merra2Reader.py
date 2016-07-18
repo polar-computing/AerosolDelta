@@ -1,9 +1,8 @@
 # encoding: utf-8
 
-# Program to read MERRA-2 Monthly Mean netCDF4 files. Currently it reads the BCSCATAU data
-# against each latitude and longitude and prints it.
-
-# Author: Karanjeet Singh (karanjeets)
+# Program to read MERRA-2 Monthly Mean netCDF4 files. Currently it
+# (a) reads the BCSCATAU data against each latitude and longitude and prints it.
+# (b) extracts all Lat-Lon and writes it to CSV.
 
 import netCDF4
 import numpy
@@ -37,6 +36,8 @@ def getBcscatauData():
     latitude_dataset = dataset.variables['lat']
     longitude_dataset = dataset.variables['lon']
 
+    print longitude_dataset[10]
+
     # Not required here as the dataset is 2-d
     #time_dataset = dataset.variables['time']
 
@@ -51,14 +52,28 @@ def getBcscatauData():
             #exit()
 
 
+def extractLatLon(outputFile):
+    # 1-d array of lat and lon
+    latitude_dataset = dataset.variables['lat']
+    longitude_dataset = dataset.variables['lon']
+
+    with open(outputFile, 'w') as out:
+        for lat in xrange(0, len(latitude_dataset)):
+            for lon in xrange(0, len(longitude_dataset)):
+                out.write(str(latitude_dataset[lat]) + "," + str(longitude_dataset[lon]) + "," + str(lat) + "," + str(lon))
+                out.write("\n")
+
+
 # This is where all begins. Expects .nc file (netCDF)
 def main(args):
-    if len(args) != 2:
+    if len(args) != 3:
         print "Wrong number of arguments!!!"
         exit(1)
     ncFile = args[1]
+    outputFile = args[2]
     init(ncFile)
-    getBcscatauData()
+    #getBcscatauData()
+    extractLatLon(outputFile)
     close()
 
 
