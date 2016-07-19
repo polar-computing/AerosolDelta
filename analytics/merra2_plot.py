@@ -4,6 +4,11 @@ from os import listdir, mkdir
 from os.path import isfile, join, isdir
 import itertools
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+import matplotlib
+matplotlib.style.use('ggplot')
 
 # PATH to the filtered CSV
 PATH = sys.argv[1]
@@ -28,6 +33,8 @@ for r in REGIONS:
     DATA[r][y] = [ ]
 
 COLUMNS = ['BCSCATAU','BCSMASS', 'OCSCATAU','OCSMASS', 'DUSCATAU', 'DUSMASS', 'SSSCATAU', 'SSSMASS','SUSCATAU', 'SO4SMASS', 'SO2SMASS', 'TOTSCATAU','TOTALSMC']
+PCOLUMNS = ['BCSMASS','OCSMASS', 'DUSMASS', 'SSSMASS', 'SO4SMASS', 'SO2SMASS']
+
 OPERATIONS = ['min', 'max', 'sum', 'mean', 'median']
 
 FIELDS = map(lambda c: c[0] + '-' + c[1],itertools.product(COLUMNS, OPERATIONS))
@@ -45,11 +52,12 @@ def safeMakeDir(path):
 
 def plotGraph(region, operation):
   getVals = lambda column: map(lambda y: DATA[region][y][column + "-" + operation], DATA[region])
-  handles = map(lambda c: plt.plot(map(int, YEARS), getVals(c), label=c), COLUMNS)
+  data = map(lambda c: getVals(c), PCOLUMNS)
 
-  plt.legend(COLUMNS)
-  plt.title("Region : {0} - {1}".format(region, operation))
-  plt.plot(handles=handles)
+  plt.figure()
+  df2 = pd.DataFrame(zip(*data), columns=PCOLUMNS)
+  df2 = df2.astype(float)
+  df2.plot.bar(stacked=True)
   plt.savefig(join(OP_PATH, region, operation + ".png"), dpi=200)
   plt.close('all')
 

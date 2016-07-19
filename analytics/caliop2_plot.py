@@ -4,6 +4,8 @@ from os import listdir, mkdir
 from os.path import isfile, join, isdir
 import itertools
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 
 import matplotlib
 matplotlib.style.use('ggplot')
@@ -48,13 +50,15 @@ def safeMakeDir(path):
 
 def plotGraph(region, operation):
   getVals = lambda column: map(lambda y: DATA[region][y][column + "-" + operation], DATA[region])
-  handles = map(lambda c: plt.plot(map(int, YEARS), getVals(c), label=c), PCOLUMNS)
+  data = map(lambda c: getVals(c), PCOLUMNS)
 
-  plt.legend(PCOLUMNS)
-  plt.title("Region : {0} - {1}".format(region, operation))
-  plt.plot(handles=handles)
+  plt.figure()
+  df2 = pd.DataFrame(zip(*data), columns=PCOLUMNS)
+  df2 = df2.astype(float)
+  df2.plot.bar(stacked=True)
   plt.savefig(join(OP_PATH, region, operation + ".png"), dpi=200)
   plt.close('all')
+
 
 for r in REGIONS:
   safeMakeDir(join(OP_PATH, r))
