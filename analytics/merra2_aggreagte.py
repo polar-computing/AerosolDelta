@@ -13,7 +13,7 @@ OP_PATH = sys.argv[2]
 df = pd.read_csv(PATH, names=[
   'RegionId', 'Year', 'Month', 'Latitude', 'Longitude', 'BCSCATAU',
   'BCSMASS', 'OCSCATAU', 'OCSMASS', 'DUSCATAU', 'DUSMASS', 'SSSCATAU',
-  'SSSMASS', 'SUSCATAU', 'SO4SMASS', 'SO2SMASS', 'TOTSCATAU'
+  'SSSMASS', 'SUSCATAU', 'SO4SMASS', 'SO2SMASS','TOTSCATAU'
 ], index_col=False, dtype = {
   'RegionId' : np.int64,
   'Year' : np.int64,
@@ -34,16 +34,21 @@ df = pd.read_csv(PATH, names=[
   'TOTSCATAU' : np.float64,
 })
 
+print "LOADED"
+
 df['TOTALSMC'] = df['BCSMASS'] + df['OCSMASS'] + df['DUSMASS'] + df['SSSMASS'] + df['SO4SMASS'] + df['SO2SMASS']
 
 g = df[[
   'RegionId', 'Year', 'BCSCATAU','BCSMASS', 'OCSCATAU',
   'OCSMASS', 'DUSCATAU', 'DUSMASS', 'SSSCATAU', 'SSSMASS',
-  'SUSCATAU', 'SO4SMASS', 'SO2SMASS', 'TOTSCATAU', 'TOTALSMC'
+  'SUSCATAU', 'SO4SMASS', 'SO2SMASS', 'TOTSCATAU','TOTALSMC'
 ]].groupby(['RegionId', 'Year'], as_index=False).agg([ np.min, np.max, np.sum, np.mean, np.median ])
 
+print "AGGREGATED"
+
 # Write aggregate to csv
-g.unstack().to_csv(OP_PATH, header=False, index=False, index_label=False)
+g.reset_index(inplace=True, level=1, col_level=1)
+g.to_csv(OP_PATH, header=True, index=True)
 
 
 
