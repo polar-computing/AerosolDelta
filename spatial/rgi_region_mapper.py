@@ -68,8 +68,8 @@ class RgiSpatial:
 
   def __init__(self,
     resolution=[0.5, 0.625],
-    rgiPath="./data/rgi-coords.csv",
-    countryBoundryPath="./data/country-boundries.json",
+    rgiPath,
+    countryBoundryPath,
     dependencies={
     'Point': Point,
     'Polygon': Polygon,
