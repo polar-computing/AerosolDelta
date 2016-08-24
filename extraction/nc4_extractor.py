@@ -25,6 +25,9 @@ class NC4Extractor:
     self.__dependencies = dependencies
     self.dataset = self.__dependencies['Dataset'](merra2FilePath, mode='r')
 
+    self.lats = self.dataset.variables['lat'][:]
+    self.lons = self.dataset.variables['lon'][:]
+
     parsed = self.__dependencies['dateParser'](self.dataset.RangeBeginningDate)
     self.month = parsed.month
     self.year  = parsed.year
@@ -35,7 +38,17 @@ class NC4Extractor:
     # NOTE: Time index is hardcoded
     for rg in self.spatialPointsOfInterest:
       for v in fields:
-        data = np.array(map(lambda pt: self.dataset.variables[v][0][pt[0]][pt[1]], self.spatialPointsOfInterest[rg]), dtype=np.float64)
+        data = np.array([], dtype=np.float64)
+
+        for lt in self.spatialPointsOfInterest[rg]:
+          points = len(self.spatialPointsOfInterest[rg][lt])
+          lon_bnds = [ self.spatialPointsOfInterest[rg][lt][0][1], self.spatialPointsOfInterest[rg][lt][points - 1][1] + 0.001 ]
+
+          # TEST THIS
+          lat_idx  = np.where((self.lats == lt))[ 0 ] if lt != 0 else np.array([180])
+          lon_inds = np.where((self.lons >= lon_bnds[0]) & (self.lons < lon_bnds[1]))
+          data = np.concatenate([ data, self.dataset.variables[v][0][lat_idx][0][lon_inds]])
+
         summary = reduce(lambda m, s: m.update({ s :  getattr(np, s)(data) }) or m, STAT_METHODS, { })
 
         yield(self.time, rg, v, summary)

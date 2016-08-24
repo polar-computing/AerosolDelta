@@ -16,8 +16,15 @@ class PoiDataStruct:
       rg = float(p[2])
 
       if not rg in poi:
-        poi[rg] = [ ]
+        poi[rg] = { }
 
-      poi[rg].append(pt)
+      if not pt[0] in poi[rg]:
+        poi[rg][pt[0]] = [ ]
+
+      poi[rg][pt[0]].append(pt)
+
+    for rg in poi:
+      for lt in poi[rg]:
+        poi[rg][lt] = sorted(poi[rg][lt], key=lambda pt: pt[1])
 
     return poi
