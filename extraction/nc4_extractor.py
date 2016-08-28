@@ -3,14 +3,6 @@ import pandas as pd
 import netCDF4
 from dateutil.parser import parse
 
-STAT_METHODS = [
-  'min',
-  'max',
-  'median',
-  'mean',
-  'std',
-]
-
 class NC4Extractor:
   def __init__(self,
     filePath,
@@ -35,7 +27,7 @@ class NC4Extractor:
 
     self.time = str(self.year) + "-" + str(self.month)
 
-  def iterativeExtractor(self, fields):
+  def iterativeExtractor(self, fields, STAT_METHODS):
     # NOTE: Time index is hardcoded
     for rg in self.spatialPointsOfInterest:
       geo = { }
@@ -56,10 +48,10 @@ class NC4Extractor:
         yield(self.time, rg, v, summary)
 
 
-  def extract(self, fields):
+  def extract(self, fields, STAT_METHODS):
     df = pd.DataFrame(columns=['time', 'region', 'field', 'min','max','median','mean','std'], index=[ ])
 
-    for i, r in enumerate(self.iterativeExtractor(fields)):
+    for i, r in enumerate(self.iterativeExtractor(fields, STAT_METHODS)):
       df.loc[i] = [ r[0], r[1], r[2], r[3]['min'], r[3]['max'], r[3]['median'], r[3]['mean'], r[3]['std']]
 
     return df
