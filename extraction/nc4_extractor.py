@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import netCDF4, sys
+import netCDF4
 from dateutil.parser import parse
 
 STAT_METHODS = [
