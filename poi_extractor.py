@@ -16,19 +16,33 @@ merra2Params = {
   'LongitudeResolution': 0.625,
 }
 
-rg = RgiSpatial(
-  resolution=[0.5, 0.625],
-  rgiPath=os.path.join(DATA_PATH, "rgi-coords.csv"),
-  countryBoundryPath=os.path.join(DATA_PATH, "country-boundries.json"))
+caliopParams = {
+  'SouthernmostLatitude': -84,
+  'NorthernmostLatitude': 84,
+  'WesternmostLongitude': -177.5,
+  'EasternmostLongitude': 177.5,
+  'LatitudeResolution': 2,
+  'LongitudeResolution': 5,
+}
 
 if __name__ == '__main__':
   DATA_SET_TYPE = sys.argv[1]
 
   if DATA_SET_TYPE == 'merra2':
-    f = open(os.path.join(DATA_PATH, "merra2-buffer.csv"), "w+")
-    for (region, point) in RGISpatialIterable(RgiSpatial.bufferLandIceRegionMapper, merra2Params).getIterator():
-      f.write("{0},{1},{2}\n".format(point[0], point[1], region))
+    dParams = merra2Params
 
-    f = open(os.path.join(DATA_PATH, "merra2-strict.csv"), "w+")
-    for (region, point) in RGISpatialIterable(rg.regionsOfInterestMapper, merra2Params).getIterator():
-      f.write("{0},{1},{2}\n".format(point[0], point[1], region))
+  elif DATA_SET_TYPE == 'caliop':
+    dParams = caliopParams
+
+  rg = RgiSpatial(
+      resolution=[dParams['LatitudeResolution'], dParams['LongitudeResolution']],
+      rgiPath=os.path.join(DATA_PATH, "rgi-coords.csv"),
+      countryBoundryPath=os.path.join(DATA_PATH, "country-boundries.json"))
+
+  f = open(os.path.join(DATA_PATH, DATA_SET_TYPE + "-buffer.csv"), "w+")
+  for (region, point) in RGISpatialIterable(RgiSpatial.bufferLandIceRegionMapper, dParams).getIterator():
+    f.write("{0},{1},{2}\n".format(point[0], point[1], region))
+
+  f = open(os.path.join(DATA_PATH, DATA_SET_TYPE + "-strict.csv"), "w+")
+  for (region, point) in RGISpatialIterable(rg.regionsOfInterestMapper, dParams).getIterator():
+    f.write("{0},{1},{2}\n".format(point[0], point[1], region))
