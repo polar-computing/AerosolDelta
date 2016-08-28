@@ -67,7 +67,7 @@ class RgiSpatial:
     return 0
 
   def __init__(self,
-    resolution=[0.5, 0.625],
+    resolution,
     rgiPath,
     countryBoundryPath,
     dependencies={

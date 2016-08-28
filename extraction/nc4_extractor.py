@@ -13,7 +13,8 @@ STAT_METHODS = [
 
 class NC4Extractor:
   def __init__(self,
-    merra2FilePath,
+    filePath,
+    geoKeys,
     poiData,
     dependencies={
       'Dataset': netCDF4.Dataset,
@@ -23,10 +24,10 @@ class NC4Extractor:
     }):
     self.spatialPointsOfInterest = poiData
     self.__dependencies = dependencies
-    self.dataset = self.__dependencies['Dataset'](merra2FilePath, mode='r')
+    self.dataset = self.__dependencies['Dataset'](filePath, mode='r')
 
-    self.lats = self.dataset.variables['lat'][:]
-    self.lons = self.dataset.variables['lon'][:]
+    self.latitude  = self.dataset.variables[geoKeys[0]][:]
+    self.longitude = self.dataset.variables[geoKeys[1]][:]
 
     parsed = self.__dependencies['dateParser'](self.dataset.RangeBeginningDate)
     self.month = parsed.month
@@ -37,16 +38,14 @@ class NC4Extractor:
   def iterativeExtractor(self, fields):
     # NOTE: Time index is hardcoded
     for rg in self.spatialPointsOfInterest:
-
       geo = { }
 
       for lt in self.spatialPointsOfInterest[rg]:
         points = len(self.spatialPointsOfInterest[rg][lt])
         lon_bnds = [ self.spatialPointsOfInterest[rg][lt][0][1], self.spatialPointsOfInterest[rg][lt][points - 1][1] + 0.001 ]
 
-        # TEST THIS
-        lat_idx  = np.where((self.lats == lt))[ 0 ] if lt != 0 else np.array([180])
-        lon_inds = np.where((self.lons >= lon_bnds[0]) & (self.lons < lon_bnds[1]))
+        lat_idx  = np.where((self.latitude == lt))[ 0 ] if lt != 0 else np.array([180])
+        lon_inds = np.where((self.longitude >= lon_bnds[0]) & (self.longitude < lon_bnds[1]))
 
         geo[str(lat_idx[0])] = lon_inds[0]
 
