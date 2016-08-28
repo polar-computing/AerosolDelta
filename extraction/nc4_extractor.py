@@ -37,18 +37,21 @@ class NC4Extractor:
   def iterativeExtractor(self, fields):
     # NOTE: Time index is hardcoded
     for rg in self.spatialPointsOfInterest:
+
+      geo = { }
+
+      for lt in self.spatialPointsOfInterest[rg]:
+        points = len(self.spatialPointsOfInterest[rg][lt])
+        lon_bnds = [ self.spatialPointsOfInterest[rg][lt][0][1], self.spatialPointsOfInterest[rg][lt][points - 1][1] + 0.001 ]
+
+        # TEST THIS
+        lat_idx  = np.where((self.lats == lt))[ 0 ] if lt != 0 else np.array([180])
+        lon_inds = np.where((self.lons >= lon_bnds[0]) & (self.lons < lon_bnds[1]))
+
+        geo[str(lat_idx[0])] = lon_inds[0]
+
       for v in fields:
-        data = np.array([], dtype=np.float64)
-
-        for lt in self.spatialPointsOfInterest[rg]:
-          points = len(self.spatialPointsOfInterest[rg][lt])
-          lon_bnds = [ self.spatialPointsOfInterest[rg][lt][0][1], self.spatialPointsOfInterest[rg][lt][points - 1][1] + 0.001 ]
-
-          # TEST THIS
-          lat_idx  = np.where((self.lats == lt))[ 0 ] if lt != 0 else np.array([180])
-          lon_inds = np.where((self.lons >= lon_bnds[0]) & (self.lons < lon_bnds[1]))
-          data = np.concatenate([ data, self.dataset.variables[v][0][lat_idx][0][lon_inds]])
-
+        data = reduce(lambda data, lt: np.concatenate([ data, self.dataset.variables[v][0][float(lt)][geo[lt]] ]), geo, np.array([], dtype=np.float64))
         summary = reduce(lambda m, s: m.update({ s :  getattr(np, s)(data) }) or m, STAT_METHODS, { })
 
         yield(self.time, rg, v, summary)
