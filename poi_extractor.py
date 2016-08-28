@@ -21,8 +21,8 @@ caliopParams = {
   'NorthernmostLatitude': 84,
   'WesternmostLongitude': -177.5,
   'EasternmostLongitude': 177.5,
-  'LatitudeResolution': 2,
-  'LongitudeResolution': 5,
+  'LatitudeResolution': 1.0,
+  'LongitudeResolution': 5.0,
 }
 
 if __name__ == '__main__':
