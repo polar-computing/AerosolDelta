@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+
+import SocketServer
+import sys
+
+(major, minor)=sys.version_info[:2]
+if major<=2 and minor < 7:
+  print "ERROR: Python version 2.7 or better required"
+  sys.exit(1)
+
+num=1
+maxnum=int(sys.argv[1])
+port=int(sys.argv[3])
+
+class TCPIntHandler(SocketServer.BaseRequestHandler):
+  def handle(self):
+    global num
+    global server
+    global maxnum
+    if num > maxnum:
+      self.request.sendall("Done")
+    else:
+      self.request.sendall("{}".format(num))
+      num+=1
+
+server = SocketServer.TCPServer((sys.argv[2], port), TCPIntHandler)
+
+server.request_queue_size=100000
+server.serve_forever()

@@ -1,0 +1,231 @@
+#!/bin/bash
+
+
+if [ -z $LAUNCHER_DIR ]
+then
+  echo "ERROR: Launcher base directory LAUNCHER_DIR not set. Exiting." >&2
+  exit
+fi
+
+
+if [ "x$LAUNCHER_WORKDIR" == "x" ]
+then
+  #Check for older WORKDIR
+  if [ ! "x$WORKDIR" == "x" ]
+  then
+    echo "NOTICE: WORKDIR variable has been depricated. Use LAUNCHER_WORKDIR." >&2
+    export LAUNCHER_WORKDIR=$WORKDIR
+  else
+    echo "WARNING: LAUNCHER_WORKDIR variable not set. Using current directory." >&2
+    export LAUNCHER_WORKDIR=`pwd`
+  fi
+fi
+
+#Step 0: Determine if resource manager integration is enabled
+if [ -z $LAUNCHER_PLUGIN_DIR ]
+then
+  echo "WARNING: LAUNCHER_PLUGIN_DIR not set. Defaulting to $LAUNCHER_DIR/plugins." >&2
+  LAUNCHER_PLUGIN_DIR=$LAUNCHER_DIR/plugins
+fi
+
+if [ -z $LAUNCHER_RMI ]
+then
+  echo "Launcher: Starting without resource manager integration."
+else
+  if [ -f $LAUNCHER_PLUGIN_DIR/$LAUNCHER_RMI.rmi ]
+  then
+    source $LAUNCHER_PLUGIN_DIR/$LAUNCHER_RMI.rmi
+    export LAUNCHER_HOSTFILE=$LAUNCHER_RMI_HOSTFILE
+  else
+    echo "WARNING: Resource Manager Integration plugin file $LAUNCHER_RMI.rmi no found." >&2
+    echo "         Available options:" >&2
+    for rmi in `ls $LAUNCHER_PLUGIN_DIR/*.rmi 2>/dev/null` 
+    do
+      echo "           `basename $rmi .rmi`" >&2
+    done
+    echo "         Defaulting to no integration." >&2
+  fi
+fi
+
+#Step 1: Ensure that LAUNCHER_HOSTFILE is set and valid
+if [ -z $LAUNCHER_HOSTFILE ]
+then
+  echo "WARNING: LAUNCHER_HOSTFILE is not set. Defaulting to localhost." >&2
+  LAUNCHER_LOCALHOST=1
+  export LAUNCHER_NHOSTS=1
+else
+  if [ ! -f $LAUNCHER_HOSTFILE ]
+  then
+    echo "ERROR: Hostfile ($LAUNCHER_HOSTFILE) not found." >&2
+    exit
+  fi
+fi
+
+#Step 2: Ensure that necessary variables are set
+if [ -z $LAUNCHER_PPN ]
+then
+  if [ ! -z $LAUNCHER_RMI_PPN ]
+  then
+    export LAUNCHER_PPN=$LAUNCHER_RMI_PPN
+  else
+    echo "WARNING: LAUNCHER_PPN is not set. Defaulting to 1." >&2
+    export LAUNCHER_PPN=1
+  fi
+fi
+
+if [ -z $LAUNCHER_NHOSTS ]
+then
+  if [ ! -z $LAUNCHER_RMI_NHOSTS ]
+  then
+    export LAUNCHER_NHOSTS=$LAUNCHER_RMI_NHOSTS
+  else
+    echo "WARNING: LAUNCHER_NHOSTS is not set. Calculating from hostfile." >&2
+    export LAUNCHER_NHOSTS=`wc -l $LAUNCHER_HOSTFILE | awk '{print $1}'`
+  fi
+fi
+
+export LAUNCHER_NPROCS=`expr $LAUNCHER_NHOSTS \* $LAUNCHER_PPN`
+
+if [ -z $LAUNCHER_NPROCS ]
+then
+  echo "ERROR: LAUNCHER_NPROCS is not set." >&2
+  exit
+fi
+
+#Backward Compatability with v2 and v1: Check for CONTROL_FILE
+if [ ! -z $CONTROL_FILE ]
+then
+  echo "NOTICE: CONTROL_FILE variable depricated. Use LAUNCHER_JOB_FILE in the future." >&2
+  export LAUNCHER_JOB_FILE=$CONTROL_FILE
+fi
+
+#Step 3: Ensure that LAUNCHER_JOB_FILE exists
+if [ -z $LAUNCHER_JOB_FILE ]
+then
+  echo "WARNING: LAUNCHER_JOB_FILE not set." >&2
+  exit
+else
+  if [ -f $LAUNCHER_JOB_FILE ]
+  then
+    export LAUNCHER_NJOBS=`wc -l $LAUNCHER_JOB_FILE | awk '{print $1}'`
+  else
+    echo "ERROR: LAUNCHER_JOB_FILE ($LAUNCHER_JOB_FILE) not found." >&2
+    exit
+  fi
+fi
+
+#Step 4: Setup Xeon Phi support
+if [ "x$LAUNCHER_NPHI" == "x" -o "x$LAUNCHER_NPHI" == "x0" ]
+then
+  LAUNCHER_USE_PHI=0
+else
+  echo "Launcher: Setting up Intel Xeon Phi support."
+  LAUNCHER_USE_PHI=1
+fi
+
+#Step 5: Scheduling setup
+if [ "x$LAUNCHER_SCHED" == "x" ]
+then
+  export LAUNCHER_SCHED="dynamic"
+fi
+
+if [ "$LAUNCHER_SCHED" == "dynamic" ]; then
+  #Start tskserver
+  RUNNING="false"
+  RETRY=0
+  while [ $RUNNING == "false" ]
+  do
+    $LAUNCHER_DIR/tskserver $LAUNCHER_NJOBS $HOSTNAME 9471 2>/dev/null &
+    LAUNCHER_DYN_PID=$!
+    disown $LAUNCHER_DYN_PID
+    sleep 1s
+    if ! ps -p $! >/dev/null 2>/dev/null
+    then
+      if [ $RETRY -ne 3 ]
+      then
+        echo "WARNING: Unable to start dynamic task service. Retrying..."
+        RETRY=`expr $RETRY + 1`
+        sleep 10s
+      else 
+        echo "ERROR: Unable to start dynamic task service. Shutting down."
+        exit
+      fi
+    else
+      RUNNING="true"
+    fi
+  done
+
+  export LAUNCHER_DYN_COUNT="$HOSTNAME"
+  export LAUNCHER_DYN_COUNT_PORT=9471
+
+  if [ $LAUNCHER_USE_PHI -ne "0" ]; then
+    #Start another tskserver for the Intel Xeon Phi cards
+    $LAUNCHER_DIR/tskserver `wc -l $PHI_WORKDIR/$PHI_CONTROL_FILE` $HOSTNAME 9472 2>/dev/null &
+    LAUNCHER_PHI_DYN_PID=$1
+    disown $LAUNCHER_PHI_DYN_PID
+    export LAUNCHER_PHI_DYN_COUNT="$HOSTNAME"
+    export LAUNCHER_PHI_DYN_COUNT_PORT=9472
+  fi
+fi
+
+#------------------------------
+# Let's finally launch the job
+#------------------------------
+
+echo "Launcher: Setup complete."
+echo
+echo "------------- SUMMARY ---------------"
+echo "   Number of hosts:    $LAUNCHER_NHOSTS"
+echo "   Working directory:  $LAUNCHER_WORKDIR"
+echo "   Processes per host: $LAUNCHER_PPN"
+echo "   Total processes:    $LAUNCHER_NPROCS"
+echo "   Total jobs:         $LAUNCHER_NJOBS"
+echo "   Scheduling method:  $LAUNCHER_SCHED"
+if [ $LAUNCHER_USE_PHI -eq 1 ]
+then
+  echo
+  echo "--- Intel Xeon Phi Support Enabled ---"
+  echo "   Cards per host:     $LAUNCHER_NPHI"
+  echo "   Processes per card: $LAUNCHER_PHI_PPN"
+  echo
+fi
+echo
+echo "-------------------------------------"
+echo "Launcher: Starting parallel tasks..."
+
+i=0
+if [ "x$LAUNCHER_LOCALHOST" == "x1" ]
+then
+  env LAUNCHER_HOST_ID=0 $LAUNCHER_DIR/init_launcher
+else
+  for host in `cat $LAUNCHER_HOSTFILE`
+  do
+    ssh $host "cd $LAUNCHER_WORKDIR; env `$LAUNCHER_DIR/pass_env` LAUNCHER_NHOSTS=$np LAUNCHER_HOST_ID=$i $LAUNCHER_DIR/init_launcher" &
+    i=`expr $i + 1`
+  done
+  wait
+fi
+
+res=$?
+
+
+#Cleanup processes and files
+if [ ! "x$LAUNCHER_DYN_PID" == "x" ]
+then
+  kill $LAUNCHER_DYN_PID
+fi
+
+if [ ! "x$LAUNCHER_PHI_DYN" == "x" ]
+then
+  kill $LAUNCHER_PHI_DYN_PID
+fi
+
+rm -f $LAUNCHER_RMI_HOSTFILE
+
+if [ $res -ne 0 ]; then
+  echo "Launcher: Done. Job exited with code: $res"
+else
+  echo "Launcher: Done. Job exited without errors"
+fi
+
+exit $res
