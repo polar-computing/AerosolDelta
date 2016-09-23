@@ -16,13 +16,13 @@ matplotlib.style.use('ggplot')
 def parse_arguments():
     # Configure
     argparser = argparse.ArgumentParser(description = 'Plot Graphs for Aerosol Delta')
-    argparser.add_argument('-i', '--inFile', help='Path to the input file (CSV)')
-    argparser.add_argument('-o', '--outDir', help='Path to the output directory where graphs will be stored')
-    argparser.add_argument('-d', '--data', help='Data: merra2, merra2-catau, merra2-mass, caliop')
-    argparser.add_argument('-op', '--operation', help='Supports - min, max, median, mean, std')
-    argparser.add_argument('-r', '--regions', help='19 regions. Specify range here. Ex: 1:19 means all regions')
-    argparser.add_argument('-y', '--years', help='Specify year range. Ex: 2002:2016 means data from year 2002 to 2016')
-    argparser.add_argument('-gb', '--groupBy', help='y: year, m: month, ym: year and month')
+    argparser.add_argument('-i', '--inFile', help='Path to the input file (CSV)', required=True)
+    argparser.add_argument('-o', '--outDir', help='Path to the output directory where graphs will be stored', required=True)
+    argparser.add_argument('-d', '--data', help='Data: merra2, merra2-catau, merra2-mass, caliop', required=True)
+    argparser.add_argument('-op', '--operation', help='Supports - min, max, median, mean, std', required=True)
+    argparser.add_argument('-r', '--regions', help='19 regions. Specify range here. 1:19 means all regions', required=True)
+    argparser.add_argument('-y', '--years', help='Specify year range. 2002:2016 means from year 2002 to 2016', required=True)
+    argparser.add_argument('-gb', '--groupBy', help='y: year, m: month, ym: year and month', required=True)
 
     # Checking for Syntactical Errors
     args = argparser.parse_args()
@@ -119,7 +119,7 @@ def plot(args):
         plt.savefig(join(args.outDir, str(region), args.operation + ".png"), dpi=200)
         plt.close('all')
 
-        print "Graph saved for Region:", region
+        print "Graph generated for Region:", region
 
 
 if __name__ == '__main__':
