@@ -11,6 +11,15 @@ CALIOP_ATTR = {'AOD_Mean_Dust', 'AOD_Mean_Polluted_Dust', 'AOD_Mean_Smoke', 'AOD
 # Operations
 OPERATIONS = {'min', 'max', 'median', 'mean', 'std'}
 
+# Functions
+FUNCTIONS = {
+    'min': 'min',
+    'max': 'max',
+    'median': 'median',
+    'mean': 'mean',
+    'std': 'mean'
+}
+
 # Other Parameters
 TIME = 'time'
 REGION = 'region'

@@ -2,6 +2,7 @@
 
 from os import mkdir
 from os.path import join, isdir
+import numpy as np
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
@@ -68,7 +69,10 @@ def plot(args):
     years = range(int(year_limits[0]), int(year_limits[1]) + 1)
 
     # Pre-Processing
-    df_main = pd.DataFrame.from_csv(args.inFile, index_col=False)
+    #df_main = pd.DataFrame.from_csv(args.inFile, index_col=False)
+    df_main =pd.read_csv(args.inFile, index_col=False, dtype={
+        'std': np.float64
+    })
     regions = clip_list(df_main.region.unique().tolist(), int(region_limits[0]), int(region_limits[1]))
     df_main[C.YEAR] = df_main[C.TIME].str.split('-', 1).str.get(0).astype(int)
     df_main[C.MONTH] = df_main[C.TIME].str.split('-', 1).str.get(1).astype(int)
@@ -103,7 +107,7 @@ def plot(args):
 
         # Group By
         df = df.groupby(gb, as_index=False)[args.operation]
-        df = getattr(df, args.operation)()
+        df = getattr(df, C.FUNCTIONS[args.operation])()
         df = df.reset_index(df_index)
 
         # Pivoting data for Plotting the graph
