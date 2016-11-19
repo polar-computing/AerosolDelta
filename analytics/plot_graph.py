@@ -7,7 +7,12 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 import argparse
+
 import constants as C
+
+import plotly.plotly as py
+import plotly.graph_objs as go
+from plotly.graph_objs import *
 
 # Use ggplot for Maps
 matplotlib.style.use('ggplot')
@@ -118,12 +123,59 @@ def plot(args):
 
         # Plotting the graph and saving it in a file
         safeMakeDir(join(args.outDir, str(region)))
+        #df.to_csv(join(args.outDir, str(region), args.operation + ".csv"), sep=',', encoding='utf-8')
+        
+        py.sign_in('karanjeetsingh', 'gbfnrxz4ry')
+
+        cols = df.columns.values.tolist()
+
+        data = []
+        for i, value in enumerate(cols):
+            data.append(go.Bar(
+                x=df.index.values,  # assign x as the dataframe column 'x'
+                y=df.ix[:,i],
+                name=value
+            ))
+        '''
+        data = [
+            go.Bar(
+                x=df.index.values,  # assign x as the dataframe column 'x'
+                y=df.ix[:,0],
+                name=df.columns[0]
+            ),
+            go.Bar(
+                x=df.index.values,
+                y=df.ix[:,1]
+            ),
+            go.Bar(
+                x=df.index.values,
+                y=df.ix[:,2]
+            ),
+            go.Bar(
+                x=df.index.values,
+                y=df.ix[:,3]
+            )
+        ]
+        '''
+
+        layout = go.Layout(
+            barmode='stack',
+            title='Aerosol Delta - ' + args.data + ' - Region - ' + str(region) + ' - Operation - ' + args.operation
+        )
+
+        fig = go.Figure(data=data, layout=layout)
+
+        mychart = py.iplot(fig)
+        print mychart.resource
+        #url = py.plot(fig, filename='pandas-bar-chart-layout')
+        #print url
+
         plt.figure()
         df[df.columns].plot(kind='bar', stacked=True)
         plt.savefig(join(args.outDir, str(region), args.operation + ".png"), dpi=200)
         plt.close('all')
 
-        print "Graph generated for Region:", region
+        #print "Graph generated for Region:", region
 
 
 if __name__ == '__main__':

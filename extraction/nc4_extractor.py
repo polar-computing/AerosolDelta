@@ -24,6 +24,7 @@ class NC4Extractor:
     parsed = self.__dependencies['dateParser'](self.dataset.RangeBeginningDate)
     self.month = parsed.month
     self.year  = parsed.year
+    self.MERRA2_FILL_VAL = 9.9999999E14
 
     self.time = str(self.year) + "-" + str(self.month)
 
@@ -43,6 +44,8 @@ class NC4Extractor:
 
       for v in fields:
         data = reduce(lambda data, lt: np.concatenate([ data, self.dataset.variables[v][0][float(lt)][geo[lt]] ]), geo, np.array([], dtype=np.float64))
+        # TODO: Change class to MERRA2 Extractor
+        data[data == self.MERRA2_FILL_VAL] = np.NaN
         summary = reduce(lambda m, s: m.update({ s :  getattr(np, s)(data) }) or m, STAT_METHODS, { })
 
         yield(self.time, rg, v, summary)

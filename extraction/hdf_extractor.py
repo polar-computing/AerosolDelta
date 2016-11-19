@@ -26,6 +26,7 @@ class HDFExtractor:
     # self.dataset.attributes()['coremetadata']
     self.year  = int(filePath.split("-")[-2][-4:] )
     self.month = int(filePath.split("-")[-1][:2]  )
+    self.CALIOP_FILL_VAL = -9999.0
 
     self.time = str(self.year) + "-" + str(self.month)
 
@@ -41,9 +42,10 @@ class HDFExtractor:
         lon_inds = np.where((self.longitude >= lon_bnds[0]) & (self.longitude < lon_bnds[1]))
 
         geo[str(lt)] = lon_inds[0]
-
       for v in fields:
         data = reduce(lambda data, lt: np.concatenate([ data, self.dataset.select(v)[int(float(lt))][geo[lt]] ]), geo, np.array([], dtype=np.float64))
+        # TODO: Change class to CALIOP Extractor
+        data[data == self.CALIOP_FILL_VAL] = np.NaN
         summary = reduce(lambda m, s: m.update({ s :  getattr(np, s)(data) }) or m, STAT_METHODS, { })
 
         yield(self.time, rg, v, summary)

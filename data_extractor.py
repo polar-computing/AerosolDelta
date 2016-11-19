@@ -11,6 +11,9 @@ if __name__ == '__main__':
   DATA_SET_TYPE = sys.argv[1]
   REGION_TYPE   = sys.argv[2] # strict / bugger
   IP_FILE_PATH  = sys.argv[3]
+  OP_FILE_PATH = None
+  if len(sys.argv) > 4:
+    OP_FILE_PATH = sys.argv[4]
 
   STAT_METHODS = [
     'min',
@@ -32,7 +35,11 @@ if __name__ == '__main__':
 
     for r in ext.iterativeExtractor(fields, STAT_METHODS):
       d = [ r[0], r[1], r[2], r[3]['min'], r[3]['max'], r[3]['median'], r[3]['mean'], r[3]['std'] ]
-      print ",".join(map(str, d))
+      if OP_FILE_PATH:
+        with open(OP_FILE_PATH, 'a') as out:
+          out.write(",".join(map(str, d)) + "\n")
+      else:
+        print ",".join(map(str, d))
 
 
   elif DATA_SET_TYPE == 'caliop':
@@ -46,5 +53,9 @@ if __name__ == '__main__':
 
     for r in ext.iterativeExtractor(fields, STAT_METHODS):
       d = [ r[0], r[1], r[2], r[3]['min'], r[3]['max'], r[3]['median'], r[3]['mean'], r[3]['std'] ]
-      print ",".join(map(str, d))
+      if OP_FILE_PATH:
+          with open(OP_FILE_PATH, 'a') as out:
+              out.write(",".join(map(str, d)) + "\n")
+      else:
+        print ",".join(map(str, d))
 

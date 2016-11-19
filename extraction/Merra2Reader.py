@@ -48,7 +48,8 @@ def getBcscatauData():
 
     for lat in xrange(0, numpy.size(bcscatau_dataset, 1)):
         for lon in xrange(0, numpy.size(bcscatau_dataset, 2)):
-            print latitude_dataset[lat], longitude_dataset[lon], bcscatau_dataset[0][lat][lon]
+            if bcscatau_dataset[0][lat][lon] < 0:
+                print latitude_dataset[lat], longitude_dataset[lon], bcscatau_dataset[0][lat][lon]
             #exit()
 
 
@@ -72,8 +73,8 @@ def main(args):
     ncFile = args[1]
     outputFile = args[2]
     init(ncFile)
-    #getBcscatauData()
-    extractLatLon(outputFile)
+    getBcscatauData()
+    #extractLatLon(outputFile)
     close()
 
 
